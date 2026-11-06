@@ -26,9 +26,9 @@ public class Assignment01Q05 {
                         visited_nodes[g] = 1;
                     }  
                 }
-                curr_neighbors = potential_neighbors;
-                potential_neighbors = new int[m[0].length];
             }
+            curr_neighbors = potential_neighbors;
+            potential_neighbors = new int[m[0].length];
             layer++;
     }
         return -1;
