@@ -6,7 +6,7 @@ public class Assignment01Q04 {
         if (direction == 'L') {
             move = -move;
         }
-        if (direction != 'L' && direction != 'R') {
+        if ((direction != 'L' && direction != 'R') || length_arr == 0 || length_arr == 1) {
             return array;
         }
         int move_right = (length_arr + move % length_arr) % length_arr; // convert move to number of right steps (positive value)
