@@ -2,37 +2,28 @@ import java.util.Arrays;
 public class Assignment01Q04 {
 
     public static int[] shiftArrayCyclic(int[] array, int move, char direction) {
+        int length_arr = array.length;
+        if (direction == 'L') {
+            move = -move;
+        }
+        if (direction != 'L' && direction != 'R') {
+            return array;
+        }
+        int move_right = (length_arr + move % length_arr) % length_arr; // convert move to number of right steps (positive value)
         int[] tmp_array = new int[array.length];
-        int index_move_right = array.length - 1;
-        int index_move_left = array.length - 1;
-        if (move >= array.length) {
-            move = move % array.length;
+        int toMove = length_arr - move_right;
+        int toBringBack = 0;
+        for (int i=0; i< move_right; i++) { // copy x right items to the start of tmp_array
+            tmp_array[i] = array[toMove];
+            toMove++;
         }
-        if (direction == 'R' && move > 0 || (direction == 'L' && move < 0)) { // move right
-            move = Math.abs(move);
-            for(int i = 0; i < move; i++){
-                tmp_array[i] = array[i]; /////////////
-                index_move_right -= 1;
-            }
-            for(int i = move; i <= array.length-1; i++) {
-                int tot = 0;
-                tmp_array[i] = array[tot];
-                tot++;
-            }
+        for (int i=move_right; i<length_arr; i++){ // copy the rest of the array
+            tmp_array[i] = array[toBringBack];
+            toBringBack++;
         }
-        if (direction == 'L' && move > 0 || (direction == 'R' && move < 0)) { // move left
-            move = Math.abs(move);
-            for(int i = 0; i < move; i++){
-                tmp_array[index_move_left] = array[i];
-                index_move_left -= 1;
-            }
-            int tot = 0;
-            for(int i = move; i <= array.length-1; i++) {
-                tmp_array[tot] = array[i];
-                tot++;
-            }
+        for(int i=0; i< length_arr; i++) {
+            array[i] = tmp_array[i];
         }
-        array = tmp_array;
         return array;
     }
 
